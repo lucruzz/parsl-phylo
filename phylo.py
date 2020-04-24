@@ -8,7 +8,7 @@ parsl.config.retries = 2
 parsl.load(config)
 
 p = Path('.')
-fasta = list(p.glob('./ORTHO*'))#p.glob('./input/ORTHO*')    
+fasta = list(p.glob('./input/ORTHO*'))   
 fastaNumbered, ma, phylip, mg, mfMG = [], [], [], [], []
 r1, r2, r3, r4, r5, r6, r7, r8, r9, r10 = [], [], [], [], [], [], [], [], [], []
 k = 0
@@ -37,7 +37,6 @@ def cleanModelgenerator(in_file, stderr = parsl.AUTO_LOGNAME):
 def raxml(phylip_file, mfMG_file, stderr = parsl.AUTO_LOGNAME):
     return 'raxml {} {} 2 4'.format(phylip_file, mfMG_file)
 
-r_future = []
 for i in fasta:
     fastaNumbered_future =  fastanumbered(i)# i equivale a fasta[0]
     fastaNumbered_future.result()
@@ -78,17 +77,5 @@ for i in fasta:
     print('mfMG: ', dst)
     
     raxml(phylip[k], mfMG[k])
-    #r_future.append(raxml(phylip[k], mfMG[k]))
     #r_future.result()
     k = k + 1
-
-#j = 0
-#for i in r_future:
-#    print('***%d', j)
-#    i.result()
-#    j = j + 1
-print('--> fastaNumbered: ', fastaNumbered)
-print('--> mafft: ', ma)
-print('--> phylip: ', phylip)
-print('--> mg: ', mg)
-print('--> mfMG: ', mfMG)
