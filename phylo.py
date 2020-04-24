@@ -38,7 +38,7 @@ def raxml(phylip_file, mfMG_file, stderr = parsl.AUTO_LOGNAME):
     return 'raxml {} {} 2 4'.format(phylip_file, mfMG_file)
 
 for i in fasta:
-    fastaNumbered_future =  fastanumbered(i)# i equivale a fasta[0]
+    fastaNumbered_future =  fastanumbered(i)
     fastaNumbered_future.result()
     src = Path('./intermediate_files/-1.fastaNumbered')
     dst = Path('./intermediate_files/{}.fastaNumbered'.format(k+1))
