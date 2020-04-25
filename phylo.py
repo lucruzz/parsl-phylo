@@ -10,7 +10,6 @@ parsl.load(config)
 p = Path('.')
 fasta = list(p.glob('./input/ORTHO*'))   
 fastaNumbered, ma, phylip, mg, mfMG = [], [], [], [], []
-r1, r2, r3, r4, r5, r6, r7, r8, r9, r10 = [], [], [], [], [], [], [], [], [], []
 k = 0
 
 @bash_app
@@ -44,7 +43,6 @@ for i in fasta:
     dst = Path('./intermediate_files/{}.fastaNumbered'.format(k+1))
     os.rename(src, dst)
     fastaNumbered.append(dst)
-    print('FASTANUMBERED: ', dst)    
 
     mafft_future = mafft(fastaNumbered[k])
     mafft_future.result()
@@ -52,7 +50,6 @@ for i in fasta:
     dst = Path('./intermediate_files/{}.mafft'.format(k+1))
     os.rename(src, dst)
     ma.append(dst)
-    print('MAFFT: ', dst)
 
     phylip_future = readseq(ma[k])
     phylip_future.result()
@@ -60,7 +57,6 @@ for i in fasta:
     dst = Path('./results/{}.phylip'.format(k+1))
     os.rename(src, dst)
     phylip.append(dst)
-    print('PHYLIP: ', dst)
 
     mg_future = modelgenerator(phylip[k])
     mg_future.result()
@@ -68,14 +64,12 @@ for i in fasta:
     dst = Path('./results/{}.mg'.format(k+1))
     os.rename(src, dst)
     mg.append(dst)
-    print('MG: ', dst)
 
     mfMG_future = cleanModelgenerator(mg[k])
     mfMG_future.result()
     dst = Path('./results/{}.mg.modelFromMG.txt'.format(k+1))
     mfMG.append(dst)
-    print('mfMG: ', dst)
     
-    raxml(phylip[k], mfMG[k])
-    #r_future.result()
+    r_future = raxml(phylip[k], mfMG[k])
+    r_future.result()
     k = k + 1
