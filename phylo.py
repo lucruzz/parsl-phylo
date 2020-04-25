@@ -1,4 +1,4 @@
-#!/bin/bash python3
+#!/bin/python3
 
 import parsl
 import os
