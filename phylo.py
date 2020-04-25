@@ -1,5 +1,3 @@
-#!/bin/python3
-
 import parsl
 import os
 from parsl.app.app import python_app, bash_app
