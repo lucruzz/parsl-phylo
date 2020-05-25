@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import parsl
 import os
 from parsl.app.app import python_app, bash_app
