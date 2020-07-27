@@ -69,11 +69,7 @@ for i in modelgenerator:
 saida = [j.result() for j in teste]
 
 mfMG = sorted(list(p.glob('./results/*.mg.modelFromMG.txt')))
-print(mfMG)
-print(phylip)
-
 
 for i, j in zip(phylip, mfMG):
     raxml_future = raxml(i, j)
 raxml_future.result()
-
