@@ -17,8 +17,8 @@ module load mafft/7.4
 
 dir=$(pwd)
 export SWIFT_PHYLO=$dir/bin
-export PATH=$SWIFT_PHYLO/mafft-7.221-with-extensions/bin:$PATH
-export PATH=$SWIFT_PHYLO/standard-RAxML-master/bin:$PATH
+#export PATH=$SWIFT_PHYLO/mafft-7.221-with-extensions/bin:$PATH
+#export PATH=$SWIFT_PHYLO/standard-RAxML-master/bin:$PATH
 export PATH=$SWIFT_PHYLO:$PATH
 
 #Dando permissão para execução do script
